@@ -19,18 +19,27 @@ def hangman():
         print(f"\nYou have {lives} lives left.", " Your guessed letters are: ", ' '.join(guessed_letters))
 
         word_list = [letter if letter in guessed_letters else '-' for letter in word]
-        print("\nGuess the word: ", ' '.join(word_list))
+        print("Guess the word: ", ' '.join(word_list))
 
-        user_letter = input("\nEneter a letter: ").upper()
+        if lives <= 3:
+            print(f"Carefull you have only {lives} lives left.")
+        else:
+            pass
+        
+        user_letter = input("Eneter a letter: ").upper()
 
         if user_letter in alphabet - guessed_letters:
             guessed_letters.add(user_letter)
             if user_letter in word_letters:
                 word_letters.remove(user_letter)
-            elif user_letter == word_letters:
-                print("You have already guessed that letter. Guess again.\n")
             else:
                 lives = lives - 1
+                print("\nWrong guess. Guess again.")
+
+        elif user_letter in guessed_letters:
+            print("\nYou have already guessed that letter. Guess again.")
+        else:
+            pass
 
     if lives == 0:
         print(f"\nYou lost the game. Your word was {word}.\n")
