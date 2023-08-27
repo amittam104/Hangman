@@ -2,6 +2,7 @@ import random
 from words import words
 import string
 
+#Function to get right word without spaces and dashes.
 def right_word(words):
     word = random.choice(words)
     while '-' in word or ' ' in word:
@@ -15,6 +16,7 @@ def hangman():
     guessed_letters = set()
     lives = 10
 
+    #Game loop to continue till one of the criterie is met i.e. correct guess or loss of lives
     while len(word_letters) > 0 and lives > 0:
         print(f"\nYou have {lives} lives left.", " Your guessed letters are: ", ' '.join(guessed_letters))
 
@@ -25,9 +27,10 @@ def hangman():
             print(f"Carefull you have only {lives} lives left.")
         else:
             pass
-        
-        user_letter = input("Eneter a letter: ").upper()
 
+        user_letter = input("Eneter a letter: ").upper()
+        
+        #  Conditions to check whether user's input is correct or not.
         if user_letter in alphabet - guessed_letters:
             guessed_letters.add(user_letter)
             if user_letter in word_letters:
